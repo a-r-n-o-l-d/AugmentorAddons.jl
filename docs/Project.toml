@@ -1,0 +1,3 @@
+[deps]
+AugmentorAddons = "462bf33f-ca23-41f7-96a6-d3416f7fe917"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
