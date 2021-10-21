@@ -3,6 +3,10 @@ uuid = "462bf33f-ca23-41f7-96a6-d3416f7fe917"
 authors = ["Arnold"]
 version = "0.1.0"
 
+[deps]
+Augmentor = "02898b10-1f73-11ea-317c-6393d7073e15"
+ImageFiltering = "6a3955dd-da59-5b1f-98d4-e7296123deb5"
+
 [compat]
 julia = "1.6"
 
