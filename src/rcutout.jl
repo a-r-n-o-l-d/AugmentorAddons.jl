@@ -11,7 +11,7 @@ julia> augment(RCutOut((100, 100))) |> plot
 
 julia> augment(RCutOut(100, 100)) |> plot
 ```
-"""-
+"""
 struct RCutOut{N, I <: Tuple, R <: AbstractRNG} <: ImageOperation
     msze::I
     rng::R
