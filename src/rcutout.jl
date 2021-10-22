@@ -2,7 +2,7 @@
     RCutOut(m; rng = GLOBAL_RNG)
     RCutOut(m...; rng = GLOBAL_RNG)
 
-This operation applies a mask of zeros to a random location within images. `m` 
+This operation applies a mask of zeros to a random location within image. `m` 
 is a tuple or integers defining the mask size.
 
 # Example
