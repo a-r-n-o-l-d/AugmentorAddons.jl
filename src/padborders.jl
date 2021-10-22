@@ -22,35 +22,39 @@ let o = augment(CIFAR10.convert2image(CIFAR10.traintensor(2)), PadImg(4, 4) |> R
 end
 =#
 
+"""
+    PadBorders(border, lo, up)
+    PadBorders(border, bo)
+    PadBorders(border, bo...)
 
+See also [`Pad`](https://juliaimages.org/ImageFiltering.jl/stable/function_reference/#ImageFiltering.Pad).
+See also [`Fill`](https://juliaimages.org/ImageFiltering.jl/stable/function_reference/#ImageFiltering.Fill).
+"""
 struct PadBorders{N, I <: Tuple} <: ImageOperation
     pad
 end
 
-function PadBorders{N}(style::Symbol,
-                       lo::T, up::T) where {N, T <: NTuple{N, <:Integer}}
-    p = Pad(style, lo, up)
-    PadBorders{N, typeof(lo)}(p)
-end
+PadBorders{N}(border::Symbol, lo::T, up::T) where {N, T <: NTuple{N, <:Integer}} =
+    PadBorders{N, typeof(lo)}(Pad(border, lo, up))
 
-function PadBorders{N}(value,
-                       lo::T, up::T) where {N, T <: NTuple{N, <:Integer}}
-    p = Fill(value, lo, up)
-    PadBorders{N, typeof(lo)}(p)
-end
+PadBorders{N}(border, lo::T, up::T) where {N, T <: NTuple{N, <:Integer}} =
+    PadBorders{N, typeof(lo)}(Fill(border, lo, up))
 
-function PadBorders(border, lo::T, up::T) where {N, T <: NTuple{N, <:Integer}}
+PadBorders(border, lo::T, up::T) where {N, T <: NTuple{N, <:Integer}} =
     PadBorders{length(lo)}(border, lo, up)
-end
 
-function PadBorders(border, p::T) where {N, T <: NTuple{N, <:Integer}} 
-    PadBorders{length(p)}(border, p, p)
-end
+PadBorders(border, bo::T) where {N, T <: NTuple{N, <:Integer}} =
+    PadBorders{length(bo)}(border, bo, bo)
 
-@inline supports_eager(::Type{<:PadBorders})      = false
+PadBorders(border, bo::Integer...) = PadBorders(border, bo)
+
+@inline supports_eager(::Type{<:PadBorders}) = false
+
 @inline supports_affineview(::Type{<:PadBorders}) = false
-@inline supports_view(::Type{<:PadBorders})       = false
-@inline supports_stepview(::Type{<:PadBorders})   = true
+
+@inline supports_view(::Type{<:PadBorders}) = false
+
+@inline supports_stepview(::Type{<:PadBorders}) = true
 
 applystepview(op::PadBorders,
               img::AbstractArray, param) = applyeager(op, img, param)
