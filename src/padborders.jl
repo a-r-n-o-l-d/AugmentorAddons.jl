@@ -27,6 +27,8 @@ end
     PadBorders(border, bo)
     PadBorders(border, bo...)
 
+Border is symbol or value
+
 See also [`Pad`](https://juliaimages.org/ImageFiltering.jl/stable/function_reference/#ImageFiltering.Pad).
 See also [`Fill`](https://juliaimages.org/ImageFiltering.jl/stable/function_reference/#ImageFiltering.Fill).
 """
