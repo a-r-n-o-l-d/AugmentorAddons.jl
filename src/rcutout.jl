@@ -6,13 +6,16 @@ struct RCutOut{N, I <: Tuple, R <: AbstractRNG} <: ImageOperation
 end
 
 RCutOut{N}(m::NTuple{N,<:Integer}, rng::R = GLOBAL_RNG) where {N,R} = 
-RCutOut{N, typeof(m), R}(m, rng)
+    RCutOut{N, typeof(m), R}(m, rng)
 
 RCutOut(m::Integer...; rng = GLOBAL_RNG) = RCutOut{length(m)}(m, rng)
 
 @inline supports_eager(::Type{<:RCutOut})      = false
+
 @inline supports_affineview(::Type{<:RCutOut}) = false
+
 @inline supports_view(::Type{<:RCutOut})       = false
+
 @inline supports_stepview(::Type{<:RCutOut})   = true
 
 applystepview(op::RCutOut, img::AbstractArray, pr) = applyeager(op, img, pr)
