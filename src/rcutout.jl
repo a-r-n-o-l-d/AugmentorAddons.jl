@@ -1,3 +1,5 @@
+#augment(RCutOut(50, 50)) |> plot
+
 struct RCutOut{N, I <: Tuple, R <: AbstractRNG} <: ImageOperation
     msze::I
     rng::R

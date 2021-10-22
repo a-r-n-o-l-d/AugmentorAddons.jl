@@ -1,8 +1,9 @@
 module AugmentorAddons
 
-using ImageFiltering
 using Augmentor
 using Augmentor: ImageOperation
+using ImageFiltering
+using Random: AbstractRNG, GLOBAL_RNG
 
 import Augmentor.supports_eager
 import Augmentor.supports_affineview
@@ -11,8 +12,9 @@ import Augmentor.supports_stepview
 import Augmentor.applystepview
 import Augmentor.applyeager
 
-export PadDims
+export PadBorders, RCutOut
 
-include("paddims.jl")
+include("padborders.jl")
+include("rcutout.jl")
 
 end
